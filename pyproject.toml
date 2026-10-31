@@ -1,0 +1,23 @@
+[project]
+name = "ds-explorations"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.4",
+    "pandas>=3.1.0",
+    "pyyaml>=6.0.3",
+    "seaborn>=0.13.2",
+]
+
+[dependency-groups]
+dev = [
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.8.0",
+    "ruff>=0.17.3",
+]
+   [tool.ruff]
+   line-length = 100
+
+   [tool.ruff.lint]
+   select = ["E", "F", "I"]

@@ -1,0 +1,32 @@
+seed: 42
+
+data:
+  dir: data/raw            # folder with your csv files
+  pattern: "*.csv"         # "*.csv" = all files, or an exact name like "dengue_all.csv"
+  split_by_year: true      # one analysis per year, using the date column
+
+# per-file column renames (key = filename without .csv)
+rename_columns:
+  "2025":
+    location.district.name: location.admin2.name
+    location.subdistrict.name: location.admin3.name
+
+columns:
+  date: metadata.primaryDate          # your date column
+  region: location.admin2.name        # your district column
+  subregion: location.admin3.name     # your taluk column, or null
+  breakdowns:                         # other categorical columns to analyse
+    - demographics.ageRange
+  numeric: []                  # "auto", a list of columns, or []
+
+labels:
+  case_label: Dengue Cases            # used in plot titles
+  region: District
+  subregion: Taluk
+
+params:
+  top_n: 10                           # top N subregions
+  heatmap_max_rows: 40                # heatmaps show only the busiest N rows
+  compare_months: [6, 7]              # month numbers to count, [] to skip
+  max_numeric_cols: 8
+  dpi: 300
