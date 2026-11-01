@@ -1,5 +1,15 @@
-data/
-outputs/
+# environment and cache
 .venv/
 __pycache__/
+
+# old notebooks (local backup only)
 old_notebooks/
+
+# data: keep the data/raw folder, ignore its contents
+data/*
+!data/raw/
+data/raw/*
+!data/raw/.gitkeep
+
+# run results, created by main.py
+outputs/
