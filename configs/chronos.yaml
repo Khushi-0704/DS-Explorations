@@ -1,0 +1,45 @@
+# ---------------------------------------------------------------
+# INPUT DATA
+# A weekly sampled CSV with one row per region per sampling date:
+#   region id, date, number of cases (column names set below).
+# Dates can fall on ANY weekday (Mon, Wed, Fri...), the code detects it.
+# Dates must be a whole number of weeks apart (weekly sampling).
+# Only case counts are used. No weather or other features.
+# ---------------------------------------------------------------
+seed: 42
+
+experiment:
+  description: Chronos-2 zero-shot district-level dengue forecasting, 4 weeks ahead
+
+data:
+  id: cases_district_sampled
+  version: v1.0
+  path: data/raw/cases_district_sampled.csv   # weekly sampled file, one row per region per week
+
+columns:
+  region: location.admin2.ID      # region / district column
+  date: metadata.primaryDate      # sampling date column
+  target: case                    # number being forecast
+
+forecast:
+  horizon_weeks: 4
+  slide_weeks: 1                 # move the cutoff forward 1 week each time
+  freq: auto                     # auto = detect the weekday from the data
+
+train:
+  start: "2021-01-04"            # history the model may use starts here
+  end: "2024-12-23"              # first cutoff: history up to here
+
+test:
+  start: "2024-11-23"            # keep predictions for weeks from here
+  end: "2025-01-27"              # ... to here
+
+model:
+  label: chronos2                # written in the "model" column of the output
+  model_id: amazon/chronos-2
+  device_map: auto
+  quantiles: [0.1, 0.5, 0.9]
+  batch_size: 64
+
+output:
+  predictions_file: chronos_predictions.csv
