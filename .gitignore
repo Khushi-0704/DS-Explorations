@@ -1,6 +1,25 @@
-# environment and cache
+# environment and secrets
 .venv/
+venv/
+.env
+
+# python cache and build
 __pycache__/
+*.py[cod]
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# editor and OS
+.vscode/
+.idea/
+.DS_Store
+
+# mkdocs build output
+site/
 
 # old notebooks (local backup only)
 old_notebooks/
@@ -10,6 +29,15 @@ data/*
 !data/raw/
 data/raw/*
 !data/raw/.gitkeep
+
+# data file types, wherever they are
+*.csv
+*.xlsx
+*.zip
+*.shp
+*.shx
+*.dbf
+*.prj
 
 # run results, created by main.py
 outputs/
